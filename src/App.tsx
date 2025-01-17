@@ -37,10 +37,15 @@ const Bold = styled.span`
 
 const FeaturesContainer = styled.section`
   display: flex;
-  height: 320px;
+  min-height: 320px;
   justify-content: center;
   gap: 24px;
-  margin-top: 64px;
+  margin-top: 48px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const GetStartedLink = styled.a`
@@ -55,7 +60,7 @@ const GetStartedLink = styled.a`
   box-shadow:
     0 4px 6px -1px rgb(0 0 0 / 0.1),
     0 2px 4px -2px rgb(0 0 0 / 0.1);
-  margin-top: 64px;
+  margin-top: 48px;
   font-weight: bold;
 
   transition-property: color, background-color, border-color;

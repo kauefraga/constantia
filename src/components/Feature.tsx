@@ -17,6 +17,10 @@ const Container = styled.div`
   * {
     margin: 0;
   }
+
+  @media (max-width: 768px) {
+    padding: 24px 4px;
+  }
 `;
 
 interface FeatureCardProps {
