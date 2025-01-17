@@ -1,0 +1,121 @@
+import { CheckCheckIcon, TargetIcon, TreeDeciduousIcon } from "lucide-react";
+import styled from "styled-components";
+import { FeatureCard } from "./components/Feature";
+
+// css green: #008000
+// css darkgreen: #006400
+
+const Container = styled.div`
+  max-width: 1280px;
+  margin: auto;
+  padding: 8px;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  margin-top: 48px;
+  line-height: 1.5;
+`;
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  * {
+    margin: 0;
+  }
+`;
+
+const Underline = styled.span`
+  text-decoration: underline;
+  text-decoration-color: green;
+`;
+
+const Bold = styled.span`
+  font-weight: bold;
+  color: green;
+`;
+
+const FeaturesContainer = styled.section`
+  display: flex;
+  height: 320px;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 64px;
+`;
+
+const GetStartedLink = styled.a`
+  display: inline-block;
+  text-decoration: none;
+
+  padding: 16px 24px;
+  background-color: green;
+  color: white;
+  border: 1px solid darkgreen;
+  border-radius: 4px;
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  margin-top: 64px;
+  font-weight: bold;
+
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  &:hover {
+    background-color: rgb(0 0 0 / 0.9);
+    border: 1px solid rgb(0 0 0);
+  }
+
+  &:active {
+    background-color: rgb(255 255 255 / 0.9);
+    color: rgb(0 0 0);
+    border: 1px solid rgb(0 0 0);
+  }
+`;
+
+function App() {
+  return (
+    <Container>
+      <Header>
+        <h1>Constantia</h1>
+
+        <p style={{ maxWidth: 480, margin: "auto" }}>
+          Quer alcançar o <Bold>próximo nível</Bold> em uma prática? Você
+          precisa <Underline>praticar constantemente a tarefa</Underline> e o
+          Constantia vai ajudar você a <Underline>criar um hábito</Underline>,
+          além de <Underline>acompanhar seus esforços</Underline>.
+        </p>
+      </Header>
+
+      <main>
+        <FeaturesContainer>
+          <FeatureCard title="Foco" icon={<TargetIcon color="green" />}>
+            Usando Constantia, você se dedica a um hábito de cada vez, tornando
+            a prática mais fácil de incorporar
+          </FeatureCard>
+
+          <FeatureCard
+            title="Constância"
+            icon={<CheckCheckIcon color="green" />}
+          >
+            Acompanhe seu progresso de perto, definindo a frequência das
+            práticas e visualizando sua constância
+          </FeatureCard>
+
+          <FeatureCard
+            title="Transformação"
+            icon={<TreeDeciduousIcon color="green" />}
+          >
+            Sua mudança de hábitos se torna fácil de entender e simples,
+            convertendo esforço diário em resultados reais
+          </FeatureCard>
+        </FeaturesContainer>
+
+        <GetStartedLink href="/tracker">Comece a sua jornada</GetStartedLink>
+      </main>
+    </Container>
+  );
+}
+
+export default App;
