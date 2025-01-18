@@ -79,7 +79,7 @@ const GetStartedLink = styled.a`
   }
 `;
 
-function App() {
+export function App() {
   return (
     <Container>
       <Header>
@@ -122,5 +122,3 @@ function App() {
     </Container>
   );
 }
-
-export default App;
