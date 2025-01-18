@@ -1,6 +1,7 @@
 import { CheckCheckIcon, TargetIcon, TreeDeciduousIcon } from "lucide-react";
+import { Link } from "react-router";
 import styled from "styled-components";
-import { FeatureCard } from "./components/feature-card";
+import { FeatureCard } from "../components/feature-card";
 
 // css green: #008000
 // css darkgreen: #006400
@@ -48,7 +49,7 @@ const FeaturesContainer = styled.section`
   }
 `;
 
-const GetStartedLink = styled.a`
+const GetStartedLink = styled(Link)`
   display: inline-block;
   text-decoration: none;
 
@@ -117,7 +118,7 @@ export function App() {
           </FeatureCard>
         </FeaturesContainer>
 
-        <GetStartedLink href="/tracker">Comece a sua jornada</GetStartedLink>
+        <GetStartedLink to="/waitlist">Comece a sua jornada</GetStartedLink>
       </main>
     </Container>
   );
