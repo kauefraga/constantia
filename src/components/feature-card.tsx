@@ -18,6 +18,14 @@ const Container = styled.div`
     margin: 0;
   }
 
+  transition-property: border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  &:hover {
+    border: 1px solid rgb(0 0 0 / 0.8);
+  }
+
   @media (max-width: 768px) {
     padding: 24px 4px;
   }

@@ -1,6 +1,6 @@
 import { CheckCheckIcon, TargetIcon, TreeDeciduousIcon } from "lucide-react";
 import styled from "styled-components";
-import { FeatureCard } from "./components/Feature";
+import { FeatureCard } from "./components/feature-card";
 
 // css green: #008000
 // css darkgreen: #006400
