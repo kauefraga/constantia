@@ -1,0 +1,9 @@
+.underline {
+    text-decoration: underline;
+    text-decoration-color: green;
+}
+
+.bold {
+    font-weight: bold;
+    color: green;
+}

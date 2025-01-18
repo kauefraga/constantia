@@ -26,16 +26,6 @@ const Header = styled.header`
   }
 `;
 
-const Underline = styled.span`
-  text-decoration: underline;
-  text-decoration-color: green;
-`;
-
-const Bold = styled.span`
-  font-weight: bold;
-  color: green;
-`;
-
 const FeaturesContainer = styled.section`
   display: flex;
   min-height: 320px;
@@ -87,10 +77,12 @@ export function App() {
         <h1>Constantia</h1>
 
         <p style={{ maxWidth: 480, margin: "auto" }}>
-          Quer alcançar o <Bold>próximo nível</Bold> em uma prática? Você
-          precisa <Underline>praticar constantemente a tarefa</Underline> e o
-          Constantia vai ajudar você a <Underline>criar um hábito</Underline>,
-          além de <Underline>acompanhar seus esforços</Underline>.
+          Quer alcançar o <span className="bold">próximo nível</span> em uma
+          prática? Você precisa{" "}
+          <span className="underline">praticar constantemente a tarefa</span> e
+          o Constantia vai ajudar você a{" "}
+          <span className="underline">criar um hábito</span>, além de{" "}
+          <span className="underline">acompanhar seus esforços</span>.
         </p>
       </Header>
 
