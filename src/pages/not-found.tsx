@@ -28,12 +28,6 @@ const Container = styled.div`
   main {
     max-width: 360px;
   }
-
-  #logo {
-    border-radius: 50%;
-    background-color: rgb(0 128 0 / 0.2);
-    padding: 12px;
-  }
 `;
 
 export function NotFound() {

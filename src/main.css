@@ -7,3 +7,9 @@
     font-weight: bold;
     color: green;
 }
+
+#logo {
+    border-radius: 50%;
+    background-color: rgb(0 128 0 / 0.2);
+    padding: 12px;
+}
