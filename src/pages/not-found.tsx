@@ -1,7 +1,6 @@
-import React from "react";
 import { Sprout } from "lucide-react";
-import styled from "styled-components";
 import { Link } from "react-router";
+import styled from "styled-components";
 
 const Container = styled.div`
   height: 100dvh;
@@ -16,7 +15,9 @@ const Container = styled.div`
   div {
     border: 1px solid rgb(0 0 0 / 0.1);
     border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* tailwind shadow-md */
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1); /* tailwind shadow-md */
     padding: 32px 48px;
   }
 
