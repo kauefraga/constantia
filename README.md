@@ -8,7 +8,7 @@ Quer alcançar o *próximo nível* em uma prática? Você precisa praticar const
 Um sistema projetado para ser fácil de usar e permitir a observação dos seus esforços constantes. Os resultados não ficam de fora!
 
 > [!IMPORTANT]
-> Acesse constantia.kauefraga.dev em breve para começar sua jornada...
+> Acesse [constantia.kauefraga.dev](https://constantia.kauefraga.dev/) em breve para começar sua jornada...
 
 ## Como rodar em ambiente de desenvolvimento
 
