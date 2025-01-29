@@ -11,9 +11,7 @@ const Container = styled.div`
   margin: auto;
   padding: 8px;
   text-align: center;
-  font-family: Inter, sans-serif;
   margin-top: 48px;
-  line-height: 1.5;
 `;
 
 const Header = styled.header`
@@ -48,9 +46,7 @@ const GetStartedLink = styled(Link)`
   color: white;
   border: 1px solid darkgreen;
   border-radius: 4px;
-  box-shadow:
-    0 4px 6px -1px rgb(0 0 0 / 0.1),
-    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   margin-top: 48px;
   font-weight: bold;
 
@@ -110,7 +106,7 @@ export function App() {
           </FeatureCard>
         </FeaturesContainer>
 
-        <GetStartedLink to="/waitlist">Comece a sua jornada</GetStartedLink>
+        <GetStartedLink to="/new">Comece a sua jornada</GetStartedLink>
       </main>
     </Container>
   );

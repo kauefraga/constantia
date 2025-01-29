@@ -9,15 +9,10 @@ const Container = styled.div`
   justify-content: center;
   padding: 0 16px;
 
-  font-family: Inter, sans-serif;
-  line-height: 1.5;
-
   div {
     border: 1px solid rgb(0 0 0 / 0.1);
     border-radius: 16px;
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1); /* tailwind shadow-md */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* tailwind shadow-md */
     padding: 32px 48px;
   }
 
