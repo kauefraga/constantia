@@ -1,9 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rubik', 'Inter', Verdana, sans-serif;
+    line-height: 1.5;
+}
+
 .underline {
     text-decoration: underline;
-    text-decoration-color: green;
+    text-decoration-color: #6a994e;
 }
 
 .bold {
     font-weight: bold;
-    color: green;
+    color: #6a994e;
+}
+
+#logo {
+    border-radius: 50%;
+    background-color: rgb(106 153 78 / 0.2);
+    padding: 12px;
 }

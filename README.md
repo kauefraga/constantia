@@ -8,7 +8,7 @@ Quer alcançar o *próximo nível* em uma prática? Você precisa praticar const
 Um sistema projetado para ser fácil de usar e permitir a observação dos seus esforços constantes. Os resultados não ficam de fora!
 
 > [!IMPORTANT]
-> Acesse constantia.kauefraga.dev em breve para começar sua jornada...
+> Acesse [constantia.kauefraga.dev](https://constantia.kauefraga.dev/) em breve para começar sua jornada...
 
 ## Como rodar em ambiente de desenvolvimento
 
@@ -56,6 +56,15 @@ A palavra "constantia" vem do latim e significa constância. Eu acredito que ter
 Versão desktop da landing page e formulário de hábito, feito no Figma.
 
 ![Duas telas de desktop espaçadas, uma contém os elementos da landing page e a outra contém ilustrações e um formulário](docs/first-design.png)
+
+</details>
+
+<details>
+  <summary>Implementação do primeiro design</summary>
+
+<br />
+
+![Implementação das telas do design acima](docs/first-implementation.png)
 
 </details>
 

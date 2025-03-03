@@ -9,15 +9,10 @@ const Container = styled.div`
   justify-content: center;
   padding: 0 16px;
 
-  font-family: Inter, sans-serif;
-  line-height: 1.5;
-
   div {
     border: 1px solid rgb(0 0 0 / 0.1);
     border-radius: 16px;
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1); /* tailwind shadow-md */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* tailwind shadow-md */
     padding: 32px 48px;
   }
 
@@ -28,12 +23,6 @@ const Container = styled.div`
   main {
     max-width: 360px;
   }
-
-  #logo {
-    border-radius: 50%;
-    background-color: rgb(0 128 0 / 0.2);
-    padding: 12px;
-  }
 `;
 
 export function NotFound() {
@@ -41,7 +30,7 @@ export function NotFound() {
     <Container>
       <div>
         <header>
-          <Sprout id="logo" size={42} strokeWidth={1.5} color="green" />
+          <Sprout id="logo" size={56} strokeWidth={1.5} color="#6A994E" />
         </header>
 
         <main>
