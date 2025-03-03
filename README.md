@@ -59,6 +59,15 @@ Versão desktop da landing page e formulário de hábito, feito no Figma.
 
 </details>
 
+<details>
+  <summary>Implementação do primeiro design</summary>
+
+<br />
+
+![Implementação das telas do design acima](docs/first-implementation.png)
+
+</details>
+
 ## Contribuições
 
 > [!NOTE]
