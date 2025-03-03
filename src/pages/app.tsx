@@ -3,8 +3,7 @@ import { Link } from "react-router";
 import styled from "styled-components";
 import { FeatureCard } from "../components/feature-card";
 
-// css green: #008000
-// css darkgreen: #006400
+// primary green: #6A994E
 
 const Container = styled.div`
   max-width: 1280px;
@@ -42,7 +41,7 @@ const GetStartedLink = styled(Link)`
   text-decoration: none;
 
   padding: 16px 24px;
-  background-color: green;
+  background-color: #6a994e;
   color: white;
   border: 1px solid darkgreen;
   border-radius: 4px;
@@ -84,14 +83,14 @@ export function App() {
 
       <main>
         <FeaturesContainer>
-          <FeatureCard title="Foco" icon={<TargetIcon color="green" />}>
+          <FeatureCard title="Foco" icon={<TargetIcon color="#6A994E" />}>
             Usando Constantia, você se dedica a um hábito de cada vez, tornando
             a prática mais fácil de incorporar
           </FeatureCard>
 
           <FeatureCard
             title="Constância"
-            icon={<CheckCheckIcon color="green" />}
+            icon={<CheckCheckIcon color="#6A994E" />}
           >
             Acompanhe seu progresso de perto, definindo a frequência das
             práticas e visualizando sua constância
@@ -99,7 +98,7 @@ export function App() {
 
           <FeatureCard
             title="Transformação"
-            icon={<TreeDeciduousIcon color="green" />}
+            icon={<TreeDeciduousIcon color="#6A994E" />}
           >
             Sua mudança de hábitos se torna fácil de entender e simples,
             convertendo esforço diário em resultados reais

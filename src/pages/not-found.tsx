@@ -30,7 +30,7 @@ export function NotFound() {
     <Container>
       <div>
         <header>
-          <Sprout id="logo" size={42} strokeWidth={1.5} color="green" />
+          <Sprout id="logo" size={56} strokeWidth={1.5} color="#6A994E" />
         </header>
 
         <main>
