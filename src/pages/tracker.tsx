@@ -1,13 +1,15 @@
-import { useUserStore } from "../stores/user.store";
+import { useEffect } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
-import styled from "styled-components";
-import { useStreakStore } from "../stores/streak.store";
 import { Shrub } from "lucide-react";
-import { useNavigate } from "react-router";
 import confetti from "canvas-confetti";
 import { ToastContainer, toast } from "react-toastify";
-import { useEffect } from "react";
+
+import { useStreakStore } from "../stores/streak.store";
+import { useUserStore } from "../stores/user.store";
+import { filterPracticesByFrequency } from "../utils/practice-validation";
 
 const TrackerContainer = styled.div`
   max-width: 1280px;
@@ -63,16 +65,16 @@ const DetailedSection = styled.section`
 
 export function Tracker() {
   const navigate = useNavigate();
-  const { habit, createdAt } = useUserStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
   const { streak, updateStreak } = useStreakStore();
 
   useEffect(() => {
-    if (!habit) {
+    if (!user.habit) {
       navigate("/new");
     }
   });
 
-  const since = new Date(createdAt).toLocaleDateString("pt-br", {
+  const since = new Date(user.createdAt).toLocaleDateString("pt-br", {
     dateStyle: "long",
   });
 
@@ -81,16 +83,24 @@ export function Tracker() {
     .reduce((prev, curr) => prev + curr, 0);
 
   function handleClick() {
-    // check based on user.frequency
-    const todaysPractices = streak.practices.filter(
-      (practice) =>
-        new Date(practice.date).getDate() === new Date().getUTCDate() &&
-        new Date(practice.date).getUTCMonth() === new Date().getUTCMonth() &&
-        new Date(practice.date).getUTCFullYear() === new Date().getUTCFullYear()
+    const practicesInCurrentPeriod = filterPracticesByFrequency(
+      streak.practices,
+      user.frequency
     );
 
-    if (todaysPractices.length > 0) {
-      toast("Você já praticou hoje!", { type: "error" });
+    if (practicesInCurrentPeriod.length > 0) {
+      toast(
+        `Você já praticou ${
+          user.frequency === "daily"
+            ? "hoje"
+            : user.frequency === "weekly"
+            ? "esta semana"
+            : "este mês"
+        }!`,
+        {
+          type: "error",
+        }
+      );
       return;
     }
 
@@ -112,7 +122,7 @@ export function Tracker() {
           <div>
             <Shrub size={240} color="#6A994E" />
             <h1>
-              Você está praticando <span>{habit}</span> há {streak.count}{" "}
+              Você está praticando <span>{user.habit}</span> há {streak.count}{" "}
               {streak.count === 1 ? "dia" : "dias"}
             </h1>
           </div>

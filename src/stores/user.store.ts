@@ -1,10 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+export type Frequency = "daily" | "weekly" | "monthly";
+
 export type User = {
   name?: string;
   habit: string;
-  frequency: "daily" | "weekly" | "monthly";
+  frequency: Frequency;
   createdAt: Date;
 };
 
