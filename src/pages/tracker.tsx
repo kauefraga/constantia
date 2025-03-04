@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import CalendarHeatmap from "react-calendar-heatmap";
@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useStreakStore } from "../stores/streak.store";
 import { useUserStore } from "../stores/user.store";
 import { filterPracticesByFrequency } from "../utils/practice-validation";
+import { NewPracticeModal } from "../components/new-practice-modal";
 
 const TrackerContainer = styled.div`
   max-width: 1280px;
@@ -68,6 +69,10 @@ export function Tracker() {
   const user = useUserStore((state) => state.user);
   const { streak, updateStreak } = useStreakStore();
 
+  const [isModalOpen, setModalOpen] = useState(false);
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+
   useEffect(() => {
     if (!user.habit) {
       navigate("/new");
@@ -82,7 +87,7 @@ export function Tracker() {
     .map((practice) => practice.duration)
     .reduce((prev, curr) => prev + curr, 0);
 
-  function handleClick() {
+  const handleFormSubmit = (formData: { duration: number }) => {
     const practicesInCurrentPeriod = filterPracticesByFrequency(
       streak.practices,
       user.frequency
@@ -101,19 +106,22 @@ export function Tracker() {
           type: "error",
         }
       );
+      handleCloseModal();
       return;
     }
 
     updateStreak({
       date: new Date(),
-      duration: 2,
+      duration: formData.duration,
     });
 
     confetti({
       particleCount: 150,
       spread: 60,
     });
-  }
+
+    handleCloseModal();
+  };
 
   return (
     <TrackerContainer>
@@ -127,13 +135,19 @@ export function Tracker() {
             </h1>
           </div>
 
-          <Button onClick={handleClick}>Pratiquei hoje!</Button>
+          <Button onClick={handleOpenModal}>Pratiquei hoje!</Button>
+
+          <NewPracticeModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            onSubmit={handleFormSubmit}
+          />
         </div>
 
         <DetailedSection>
           <div>
             <p>Praticando desde {since}</p>
-            <p>Você já praticou mais de {hoursPracticed} horas</p>
+            <p>Você já praticou mais de {Number(hoursPracticed)} horas</p>
           </div>
 
           <div>
