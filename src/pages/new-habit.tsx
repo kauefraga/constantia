@@ -1,5 +1,5 @@
 import { Sprout } from "lucide-react";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { type User, useUserStore } from "../stores/user.store";
@@ -114,7 +114,13 @@ const Form = styled.form`
 
 export function NewHabit() {
   const navigate = useNavigate();
-  const createUser = useUserStore((state) => state.createUser);
+  const { user: existingUser, createUser } = useUserStore();
+
+  useEffect(() => {
+    if (existingUser.habit) {
+      navigate("/tracker");
+    }
+  });
 
   const [user, setUser] = useState<User>({
     name: "",
