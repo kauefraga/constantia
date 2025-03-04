@@ -7,6 +7,7 @@ import { Shrub } from "lucide-react";
 import { useNavigate } from "react-router";
 import confetti from "canvas-confetti";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 const TrackerContainer = styled.div`
   max-width: 1280px;
@@ -65,9 +66,11 @@ export function Tracker() {
   const { habit, createdAt } = useUserStore((state) => state.user);
   const { streak, updateStreak } = useStreakStore();
 
-  if (!habit) {
-    navigate("/new");
-  }
+  useEffect(() => {
+    if (!habit) {
+      navigate("/new");
+    }
+  });
 
   const since = new Date(createdAt).toLocaleDateString("pt-br", {
     dateStyle: "long",
