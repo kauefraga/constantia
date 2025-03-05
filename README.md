@@ -14,7 +14,7 @@ Um sistema web projetado para ser
 
 <div align='center'>
 
-[![principais páginas do sistema](docs/shotsso.png)](https://constantia.kauefraga/dev/)
+[![principais páginas do sistema](docs/shotsso.png)](https://constantia.kauefraga.dev/)
 
 </div>
 
