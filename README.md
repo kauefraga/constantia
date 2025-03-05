@@ -14,9 +14,32 @@ Um sistema web projetado para ser
 
 <div align='center'>
 
-[![demonstração da utilização do sistema](docs/v1-demo.gif)](https://constantia.kauefraga/dev/)
+[![principais páginas do sistema](docs/shotsso.png)](https://constantia.kauefraga/dev/)
 
 </div>
+
+## Estrutura do projeto e escolhas técnicas
+
+Dentro do diretório [`src`](src/) é possível ver a seguinte estrutura:
+
+```sh
+├─ components/  # componentes
+├─ pages/       # páginas
+├─ stores/      # entidades e localStorage
+├─ utils/       # utilitários
+├─ main.css     # estilos globais
+├─ main.tsx     # ponto de entrada, roteamento e fontes
+```
+
+As principais tecnologias usadas para desenvolver este sistema foram:
+
+- TypeScript
+- Bun
+- React
+- React Router
+- Zustand
+- Styled Components
+- CloudFlare Pages
 
 ## Como rodar em ambiente de desenvolvimento
 
@@ -73,6 +96,8 @@ Versão desktop da landing page e formulário de hábito, feito no Figma.
 <br />
 
 ![Implementação das telas do design acima](docs/first-implementation.png)
+
+[![demonstração da utilização do sistema](docs/v1-demo.gif)](https://constantia.kauefraga/dev/)
 
 </details>
 
