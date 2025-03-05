@@ -77,7 +77,7 @@ export function Tracker() {
     if (!user.habit) {
       navigate("/new");
     }
-  });
+  }, [navigate, user.habit]);
 
   const since = new Date(user.createdAt).toLocaleDateString("pt-br", {
     dateStyle: "long",

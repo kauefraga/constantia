@@ -120,7 +120,7 @@ export function NewHabit() {
     if (existingUser.habit) {
       navigate("/tracker");
     }
-  });
+  }, [existingUser.habit, navigate]);
 
   const [user, setUser] = useState<User>({
     name: "",
