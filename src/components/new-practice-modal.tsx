@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -7,35 +8,42 @@ const ModalContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(0deg, rgb(0 0 0 / 0.7) 0%, rgb(0 0 0 / 0.1) 80%);
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Modal = styled.div`
-  border: 1px solid black;
+  border: 3px solid rgb(0 0 0 / 0.1);
   background-color: white;
-  padding: 24px;
+  padding: 32px;
   border-radius: 8px;
   width: 100%;
   max-width: 400px;
 
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-header h2 {
+    font-weight: 500;
+  }
+
   form {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
     text-align: left;
   }
 
-  form input {
+  form div input {
     padding: 8px;
+    margin-right: 12px;
   }
-`;
-
-const ModalActions = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 16px;
 `;
 
 const PrimaryButton = styled.button`
@@ -63,25 +71,19 @@ const PrimaryButton = styled.button`
 `;
 
 const CloseButton = styled.button`
-  padding: 8px;
-  border: 1px solid black;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  background: none;
+  border: none;
 
   transition-property: color, background-color, border-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 
   &:hover {
-    background-color: rgb(0 0 0 / 0.9);
-    color: white;
-    border: 1px solid rgb(0 0 0);
+    color: rgb(255 0 0 / 0.8);
   }
 
   &:active {
-    background-color: rgb(255 255 255 / 0.9);
-    color: rgb(0 0 0);
-    border: 1px solid rgb(0 0 0);
+    color: rgb(255, 0, 0);
   }
 `;
 
@@ -107,9 +109,6 @@ export function NewPracticeModal({
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    // check if formData.duration is a valid number
-    console.log(formData);
-
     onSubmit(formData);
   };
 
@@ -120,26 +119,27 @@ export function NewPracticeModal({
   return (
     <ModalContainer>
       <Modal>
-        <h2>Registro de prática</h2>
+        <div className="modal-header">
+          <h2>Registro de prática</h2>
+          <CloseButton type="button" onClick={onClose}>
+            <X size={32} strokeWidth={1.5} />
+          </CloseButton>
+        </div>
+
         <form onSubmit={handleSubmit}>
+          <label>Por quanto tempo você praticou? (horas)</label>
           <div>
-            <label>Por quanto tempo você praticou? (horas)</label>
             <input
               type="number"
               name="duration"
-              value={formData.duration}
               onChange={handleChange}
+              value={formData.duration}
               placeholder="2"
               required
+              autoFocus
             />
-          </div>
-
-          <ModalActions>
-            <CloseButton type="button" onClick={onClose}>
-              Fechar
-            </CloseButton>
             <PrimaryButton type="submit">Salvar</PrimaryButton>
-          </ModalActions>
+          </div>
         </form>
       </Modal>
     </ModalContainer>
