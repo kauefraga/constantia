@@ -5,12 +5,12 @@ import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import { Shrub } from "lucide-react";
 import confetti from "canvas-confetti";
-import { ToastContainer, toast } from "react-toastify";
 
 import { useStreakStore } from "../stores/streak.store";
 import { useUserStore } from "../stores/user.store";
 import { filterPracticesByFrequency } from "../utils/practice-validation";
 import { NewPracticeModal } from "../components/new-practice-modal";
+import { v7 } from "uuid";
 
 const TrackerContainer = styled.div`
   max-width: 1280px;
@@ -21,6 +21,10 @@ const TrackerContainer = styled.div`
 
   h1 {
     color: #6a994e;
+    max-width: 640px;
+    margin: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   span {
@@ -67,7 +71,7 @@ const DetailedSection = styled.section`
 export function Tracker() {
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
-  const { streak, updateStreak } = useStreakStore();
+  const { streak, updateStreak, updatePractice } = useStreakStore();
 
   const [isModalOpen, setModalOpen] = useState(false);
   const handleOpenModal = () => setModalOpen(true);
@@ -84,42 +88,36 @@ export function Tracker() {
   });
 
   const hoursPracticed = streak.practices
-    .map((practice) => practice.duration)
+    .map((practice) => Number(practice.duration))
     .reduce((prev, curr) => prev + curr, 0);
 
+  const practicesInCurrentPeriod = filterPracticesByFrequency(
+    streak.practices,
+    user.frequency
+  );
+
   const handleFormSubmit = (formData: { duration: number }) => {
-    const practicesInCurrentPeriod = filterPracticesByFrequency(
-      streak.practices,
-      user.frequency
-    );
+    const duration = Number(formData.duration);
 
     if (practicesInCurrentPeriod.length > 0) {
-      toast(
-        `Você já praticou ${
-          user.frequency === "daily"
-            ? "hoje"
-            : user.frequency === "weekly"
-            ? "esta semana"
-            : "este mês"
-        }!`,
-        {
-          type: "error",
-        }
-      );
+      updatePractice(duration);
+      confetti({
+        particleCount: 50,
+        spread: 60,
+      });
       handleCloseModal();
       return;
     }
 
     updateStreak({
+      id: v7(),
       date: new Date(),
-      duration: formData.duration,
+      duration,
     });
-
     confetti({
-      particleCount: 150,
+      particleCount: 200,
       spread: 60,
     });
-
     handleCloseModal();
   };
 
@@ -147,11 +145,25 @@ export function Tracker() {
         <DetailedSection>
           <div>
             <p>Praticando desde {since}</p>
-            <p>Você já praticou mais de {Number(hoursPracticed)} horas</p>
+            <p>Você já praticou mais de {hoursPracticed} horas</p>
           </div>
 
           <div>
             <CalendarHeatmap
+              monthLabels={[
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez",
+              ]}
               classForValue={(value) => {
                 if (!value) {
                   return "color-empty";
@@ -165,7 +177,6 @@ export function Tracker() {
           </div>
         </DetailedSection>
       </main>
-      <ToastContainer limit={1} />
     </TrackerContainer>
   );
 }
