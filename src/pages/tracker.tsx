@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import { Shrub } from "lucide-react";
@@ -11,6 +11,7 @@ import { useUserStore } from "../stores/user.store";
 import { filterPracticesByFrequency } from "../utils/practice-validation";
 import { NewPracticeModal } from "../components/new-practice-modal";
 import { v7 } from "uuid";
+import { Heading, Text } from "@radix-ui/themes";
 
 const TrackerContainer = styled.div`
   max-width: 1280px;
@@ -28,34 +29,14 @@ const TrackerContainer = styled.div`
   }
 
   span {
-    text-decoration: underline;
-    text-decoration-color: rgb(0 0 0 / 0.9);
-  }
-`;
+    background: linear-gradient(
+      320deg in oklch,
+      hsl(98deg 32% 45%) 0%,
+      hsl(55deg 77% 51%) 60%
+    );
 
-const Button = styled.button`
-  padding: 16px 24px;
-  background-color: #6a994e;
-  color: white;
-  border: 1px solid darkgreen;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  margin-top: 24px;
-  font-size: 16px;
-
-  transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-
-  &:hover {
-    background-color: rgb(0 0 0 / 0.9);
-    border: 1px solid rgb(0 0 0);
-  }
-
-  &:active {
-    background-color: rgb(255 255 255 / 0.9);
-    color: rgb(0 0 0);
-    border: 1px solid rgb(0 0 0);
+    background-clip: text;
+    color: transparent;
   }
 `;
 
@@ -73,9 +54,7 @@ export function Tracker() {
   const user = useUserStore((state) => state.user);
   const { streak, updateStreak, updatePractice } = useStreakStore();
 
-  const [isModalOpen, setModalOpen] = useState(false);
-  const handleOpenModal = () => setModalOpen(true);
-  const handleCloseModal = () => setModalOpen(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     if (!user.habit) {
@@ -105,7 +84,7 @@ export function Tracker() {
         particleCount: 50,
         spread: 60,
       });
-      handleCloseModal();
+      setIsDialogOpen(false);
       return;
     }
 
@@ -118,7 +97,7 @@ export function Tracker() {
       particleCount: 200,
       spread: 60,
     });
-    handleCloseModal();
+    setIsDialogOpen(false);
   };
 
   return (
@@ -126,26 +105,26 @@ export function Tracker() {
       <main>
         <div>
           <div>
-            <Shrub size={240} color="#6A994E" />
-            <h1>
+            <Link to="/">
+              <Shrub size={240} color="#6A994E" />
+            </Link>
+            <Heading size="8">
               Você está praticando <span>{user.habit}</span> há {streak.count}{" "}
               {streak.count === 1 ? "dia" : "dias"}
-            </h1>
+            </Heading>
           </div>
 
-          <Button onClick={handleOpenModal}>Pratiquei hoje!</Button>
-
           <NewPracticeModal
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
+            isOpen={isDialogOpen}
+            onOpenChange={() => setIsDialogOpen(!isDialogOpen)}
             onSubmit={handleFormSubmit}
           />
         </div>
 
         <DetailedSection>
           <div>
-            <p>Praticando desde {since}</p>
-            <p>Você já praticou mais de {hoursPracticed} horas</p>
+            <Text as="p">Praticando desde {since}</Text>
+            <Text as="p">Você já praticou mais de {hoursPracticed} horas</Text>
           </div>
 
           <div>

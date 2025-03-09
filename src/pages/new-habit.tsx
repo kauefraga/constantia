@@ -1,8 +1,9 @@
 import { Sprout } from "lucide-react";
 import { type FormEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import styled from "styled-components";
-import { type User, useUserStore } from "../stores/user.store";
+import { Frequency, type User, useUserStore } from "../stores/user.store";
+import { Heading, Text, TextField, RadioGroup, Button } from "@radix-ui/themes";
 
 const Container = styled.div`
   display: flex;
@@ -11,19 +12,19 @@ const Container = styled.div`
   height: 100dvh;
   margin: auto;
   padding: 16px;
+  gap: 48px;
 
   #left,
   #right {
     width: 100%;
   }
 
-  #left {
+  #right {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
     height: 70%;
-    margin-right: 72px;
 
     background: rgb(0, 0, 0);
     background: linear-gradient(
@@ -37,43 +38,29 @@ const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    height: auto;
 
-    #left {
-      margin-right: 0;
+    #right {
       height: fit-content;
-      margin-bottom: 24px;
     }
   }
 `;
 
 const Form = styled.form`
-  div,
-  button {
-    margin-top: 32px;
-  }
+  margin-top: 32px;
 
   #frequency {
     display: flex;
     flex-direction: column;
     gap: 12px;
-
-    * {
-      margin: 0;
-    }
-
-    label {
-      margin-left: 12px;
-    }
   }
 
-  input {
-    margin-top: 16px;
+  .form-field {
+    margin-top: 32px;
   }
 
   input[type="text"] {
-    width: 100%;
-    padding: 12px;
     border: 1px solid rgb(0 0 0 / 0.4);
     border-radius: 4px;
     transition-property: border-color;
@@ -85,13 +72,11 @@ const Form = styled.form`
     border-color: rgb(0 0 0 / 0.7);
   }
 
-  button {
+  #save-button {
     font-size: 16px;
-    padding: 12px 32px;
     background-color: #6a994e;
     color: white;
-
-    border: 1px solid darkgreen;
+    border: 1px solid #386641;
     border-radius: 4px;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
@@ -146,93 +131,82 @@ export function NewHabit() {
 
   return (
     <Container>
-      <div id="left">
-        <Sprout id="logo" size={56} strokeWidth={1.5} color="lightgreen" />
-        <h1>Constantia</h1>
-      </div>
-
-      <main id="right">
-        <h2>Novo hábito</h2>
+      <main id="left">
+        <Heading as="h2">Novo hábito</Heading>
 
         <Form onSubmit={handleForm}>
-          <div>
-            <p>Informe o hábito que você deseja praticar.</p>
+          <div className="form-field">
+            <Text as="p">Informe o hábito que você deseja praticar.</Text>
 
-            <input
+            <TextField.Root
               type="text"
               id="habit"
-              placeholder="Jogar Valorant..."
+              size="3"
+              mt="3"
+              placeholder="Ler livros..."
               onChange={(e) => setUser({ ...user, habit: e.target.value })}
               required
             />
           </div>
 
-          <div id="frequency">
-            <p>Qual é a frequência com que você deseja praticar?</p>
+          <div id="frequency" className="form-field">
+            <Text as="p">
+              Qual é a frequência com que você deseja praticar?
+            </Text>
 
-            <div>
-              <input
-                type="radio"
-                id="daily"
-                name="frequency"
-                value="daily"
-                onChange={() =>
-                  setUser({
-                    ...user,
-                    frequency: "daily",
-                  })
-                }
-                required
-              />
-              <label htmlFor="daily">Todo dia</label>
-            </div>
-
-            <div>
-              <input
-                type="radio"
-                id="weekly"
-                name="frequency"
-                value="weekly"
-                onChange={() =>
-                  setUser({
-                    ...user,
-                    frequency: "weekly",
-                  })
-                }
-                required
-              />
-              <label htmlFor="weekly">Uma vez por semana</label>
-            </div>
-
-            <div>
-              <input
-                type="radio"
-                id="monthly"
-                name="frequency"
-                value="monthly"
-                onChange={() =>
-                  setUser({
-                    ...user,
-                    frequency: "monthly",
-                  })
-                }
-                required
-              />
-              <label htmlFor="monthly">Uma vez por mês</label>
-            </div>
+            <RadioGroup.Root
+              name="frequency"
+              defaultValue="daily"
+              style={{ gap: "12px" }}
+              color="grass"
+              onValueChange={(value) =>
+                setUser({
+                  ...user,
+                  frequency: value as Frequency,
+                })
+              }
+              required
+            >
+              <RadioGroup.Item className="radio" value="daily">
+                Todo dia
+              </RadioGroup.Item>
+              <RadioGroup.Item className="radio" value="weekly">
+                Uma vez por semana
+              </RadioGroup.Item>
+              <RadioGroup.Item className="radio" value="monthly">
+                Uma vez por mês
+              </RadioGroup.Item>
+            </RadioGroup.Root>
           </div>
 
-          <div>
-            <p>Qual é o seu nome? (opcional)</p>
-            <input
+          <div className="form-field">
+            <Text as="p">Qual é o seu nome? (opcional)</Text>
+
+            <TextField.Root
               type="text"
+              id="username"
               onChange={(e) => setUser({ ...user, name: e.target.value })}
+              placeholder="João"
+              size="3"
+              mt="3"
             />
           </div>
 
-          <button type="submit">Salvar</button>
+          <Button
+            size="3"
+            id="save-button"
+            className="form-field"
+            style={{ padding: "0 24px" }}
+          >
+            Salvar
+          </Button>
         </Form>
       </main>
+
+      <Link to="/" style={{ textDecoration: "none" }} id="right">
+        <Sprout id="logo" size={56} strokeWidth={1.5} color="#6A994E" />
+        <h1>Constantia</h1>
+      </Link>
     </Container>
   );
 }

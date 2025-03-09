@@ -4,11 +4,9 @@ import styled from "styled-components";
 const Container = styled.div`
   border: 1px solid rgb(0 0 0 / 0.2);
   border-radius: 4px;
-  box-shadow:
-    0 4px 6px -1px rgb(0 0 0 / 0.1),
-    0 2px 4px -2px rgb(0 0 0 / 0.1); /* tailwind shadow-md */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* tailwind shadow-md */
   max-width: 344px;
-  padding: 0 8px;
+  padding: 64px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
