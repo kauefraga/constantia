@@ -6,7 +6,7 @@ import "react-calendar-heatmap/dist/styles.css";
 import { Shrub } from "lucide-react";
 import confetti from "canvas-confetti";
 
-import { useStreakStore } from "../stores/streak.store";
+import { Practice, useStreakStore } from "../stores/streak.store";
 import { useUserStore } from "../stores/user.store";
 import {
   filterPracticesByFrequency,
@@ -166,6 +166,15 @@ export function Tracker() {
               startDate={new Date("2024-12-31")}
               endDate={new Date("2025-12-31")}
               values={streak.practices}
+              titleForValue={(value) => {
+                const practice = value as Practice;
+
+                return practice
+                  ? `${practice.duration} horas praticadas - ${new Date(
+                      practice.date
+                    ).toLocaleDateString()}`
+                  : "Nenhuma prática registrada";
+              }}
             />
           </div>
         </DetailedSection>
