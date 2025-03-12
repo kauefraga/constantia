@@ -25,17 +25,16 @@ export const useStreakStore = create<StreakState>()(
     (set) => ({
       streak: { count: 0, practices: [] },
       updateStreak: (practice) =>
-        set((state) => ({
+        set(({ streak }) => ({
           streak: {
-            count: state.streak.count + 1,
-            practices: [...state.streak.practices, practice],
+            count: streak.count + 1,
+            practices: [...streak.practices, practice],
           },
         })),
       updatePractice: (additionalDuration) =>
-        set((state) => {
-          const length = state.streak.practices.length;
-          const practice = state.streak.practices[length - 1];
-          const practices = state.streak.practices.filter(
+        set(({ streak }) => {
+          const practice = streak.practices[streak.practices.length - 1];
+          const practices = streak.practices.filter(
             (p) => p.id !== practice.id
           );
 
@@ -46,7 +45,7 @@ export const useStreakStore = create<StreakState>()(
 
           return {
             streak: {
-              ...state.streak,
+              ...streak,
               practices: [...practices, updatedPractice],
             },
           };

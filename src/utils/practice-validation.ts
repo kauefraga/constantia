@@ -1,7 +1,7 @@
 import { Practice } from "../stores/streak.store";
 import { Frequency } from "../stores/user.store";
 
-const isSameDay = (date1: Date, date2: Date) =>
+export const isSameDay = (date1: Date, date2: Date) =>
   date1.getUTCDate() === date2.getUTCDate() &&
   date1.getUTCMonth() === date2.getUTCMonth() &&
   date1.getUTCFullYear() === date2.getUTCFullYear();

@@ -8,7 +8,10 @@ import confetti from "canvas-confetti";
 
 import { useStreakStore } from "../stores/streak.store";
 import { useUserStore } from "../stores/user.store";
-import { filterPracticesByFrequency } from "../utils/practice-validation";
+import {
+  filterPracticesByFrequency,
+  isSameDay,
+} from "../utils/practice-validation";
 import { NewPracticeModal } from "../components/new-practice-modal";
 import { v7 } from "uuid";
 import { Heading, Text } from "@radix-ui/themes";
@@ -52,7 +55,8 @@ const DetailedSection = styled.section`
 export function Tracker() {
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
-  const { streak, updateStreak, updatePractice } = useStreakStore();
+  const { streak, updateStreak, updatePractice, resetStreak } =
+    useStreakStore();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -77,6 +81,16 @@ export function Tracker() {
 
   const handleFormSubmit = (formData: { duration: number }) => {
     const duration = Number(formData.duration);
+
+    const lastPractice = streak.practices[streak.practices.length - 1];
+
+    if (!lastPractice) {
+      resetStreak();
+    }
+
+    if (lastPractice && !isSameDay(new Date(), new Date(lastPractice.date))) {
+      resetStreak();
+    }
 
     if (practicesInCurrentPeriod.length > 0) {
       updatePractice(duration);
